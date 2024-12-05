@@ -1,0 +1,39 @@
+version: '3.8'
+
+services:
+  frontend:
+    build:
+      context: ./frontend
+    ports:
+      - "3000:80"
+    networks:
+      - app_network
+
+  backend:
+    build:
+      context: ./backend
+    ports:
+      - "5000:5000"
+    networks:
+      - app_network
+    depends_on:
+      - database
+    environment:
+      - MONGO_URL=mongodb://database:27017/todo-list
+
+  database:
+    image: mongo:5.0
+    container_name: mongo
+    ports:
+      - "27017:27017"
+    networks:
+      - app_network
+    volumes:
+      - mongo-data:/data/db
+
+networks:
+  app_network:
+    driver: bridge
+
+volumes:
+  mongo-data:
