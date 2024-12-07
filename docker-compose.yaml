@@ -37,3 +37,4 @@ networks:
 
 volumes:
   mongo-data:
+
