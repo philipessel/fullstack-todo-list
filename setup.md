@@ -36,9 +36,9 @@ To build the application, navigate to the root directory of the project (where t
 
 ```bash
 
-docker-compose build
+docker-compose build # This command will build the Docker images for both the frontend and backend services.
 ```
-This command will build the Docker images for both the frontend and backend services.
+
 
 
 ## Running the Application
@@ -69,7 +69,6 @@ To stop the running containers, you can use the following command:
 ```bash
 docker-compose down
 ```
-
 This command will stop and remove all the containers defined in the `docker-compose.yml` file.
 
 
