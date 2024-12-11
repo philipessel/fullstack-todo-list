@@ -1,0 +1,42 @@
+version: '3.8'
+services:
+  frontend:
+    build: ./Frontend
+    ports:
+      - "3001:80"  # Expose frontend on port 3001
+    depends_on:
+      - backend
+    networks:
+      - app-network
+
+  backend:
+    build: ./Backend
+    ports:
+      - "3000:3000"  # Expose backend on port 3000
+    environment:
+      - MONGO_URI=mongodb://db:27017/todos  # Database connection string
+    depends_on:
+      - db
+    networks:
+      - app-network
+
+  db:
+    image: mongo
+    ports:
+      - "27017:27017"
+    healthcheck:
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
+
+volumes:
+  mongodb_data:
