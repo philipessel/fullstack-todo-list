@@ -5,7 +5,7 @@ services:
     build:
       context: ./frontend
     ports:
-      - "3000:80"
+      - "3000:80" # Expose frontend on port 3000
     networks:
       - app_network
 
@@ -13,13 +13,13 @@ services:
     build:
       context: ./backend
     ports:
-      - "5000:5000"
+      - "5000:5000" # Expose backend on port 5000
     networks:
       - app_network
     depends_on:
       - database
     environment:
-      - MONGO_URL=mongodb://database:27017/todo-list
+      - MONGO_URL=mongodb://database:27017/todo-list # Database connection string
 
   database:
     image: mongo:5.0
