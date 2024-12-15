@@ -19,10 +19,10 @@ services:
     depends_on:
       - database
     environment:
-      - MONGO_URL=mongodb://database:27017/todo-list # Database connection string
+      - MONGO_URL=mongodb://mongo:27017/todo-list # Database connection string
 
   database:
-    image: mongo:5.0
+    image: mongo:4.4
     container_name: mongo
     ports:
       - "27017:27017"
